@@ -1,0 +1,8 @@
+/home/alice/:
+    alice: read, write, execute
+    admins: read, write, execute
+ 
+/shared/project1/:
+    users: read, execute
+    project1: read, write, execute
+    admins: read, write, execute

@@ -1,0 +1,4 @@
+alice: alice
+users: alice, bob, charlie
+project1: alice, bob
+admins: root
