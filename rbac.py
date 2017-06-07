@@ -5,6 +5,7 @@ import string
 GROUPENUM = []
 USERENUM = []
 OBJECTNUM = []
+ACCESSRIGHT = ["execute", "write", "read"]
 USERGROUPMATRIX = []
 PERMISSIONMATRIX = []
 
@@ -48,13 +49,17 @@ def groups (filename):
 # convert permission into number (read - 4, write - 2, execute - 1)
 def convertPermToNum(perms):
     total = 0
+    index = 0
     for perm in perms.split(', '):
-        if perm == "read":
-            total += 4
-        elif perm == "write":
-            total += 2
-        elif perm == "execute":
-            total += 1
+        # add permission to list
+        if perm not in ACCESSRIGHT:
+            ACCESSRIGHT.append(perm)
+
+        # get index of permission
+        index = ACCESSRIGHT.index(perm)
+        # set bit of pecific index
+        total = total | (2**index)
+
     return total
 
 # create object enumerate and permission maxtrix of group(row) x object(column)
@@ -92,15 +97,12 @@ def resources (filename):
 
 # check permission according to the permission
 def checkUserAction(action, permission):
-    if action == "read":
-        if bin(permission)[-3] == '1':
+    if action in ACCESSRIGHT:
+        index = (ACCESSRIGHT.index(action) + 1) * -1
+        binaryPerm = bin(permission)[2:].zfill(len(ACCESSRIGHT))
+        if binaryPerm[index] == '1':
             return True
-    elif action == "write":
-        if bin(permission)[-2] == '1':
-            return True
-    elif action == "execute":
-        if bin(permission)[-1] == '1':
-            return True
+    
     return False
 
 # process Attempted actions
