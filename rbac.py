@@ -97,9 +97,12 @@ def resources (filename):
 
 # check permission according to the permission
 def checkUserAction(action, permission):
+    # print "permission: %s" % permission
     if action in ACCESSRIGHT:
         index = (ACCESSRIGHT.index(action) + 1) * -1
         binaryPerm = bin(permission)[2:].zfill(len(ACCESSRIGHT))
+        # print "bin: %s and index: %s" % (binaryPerm, index)
+        # print binaryPerm[index]
         if binaryPerm[index] == '1':
             return True
     
@@ -113,8 +116,8 @@ def attempts (filename):
             line = cleartext.rstrip('\n')
             sub, action, obj = line.split(' ')
 
-            # check object is in object enumerate
-            if obj in OBJECTNUM:
+            # check object, subject, and action
+            if obj in OBJECTNUM and sub in USERENUM and action in ACCESSRIGHT:
                 # get all the groups that user is in
                 groups = []
                 for group in GROUPENUM:
