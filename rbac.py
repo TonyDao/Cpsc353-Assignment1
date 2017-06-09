@@ -116,7 +116,7 @@ def attempts (filename):
             line = cleartext.rstrip('\n')
             sub, action, obj = line.split(' ')
 
-            # check object, subject, and action
+            # check object is in object enumerate
             if obj in OBJECTNUM and sub in USERENUM and action in ACCESSRIGHT:
                 # get all the groups that user is in
                 groups = []

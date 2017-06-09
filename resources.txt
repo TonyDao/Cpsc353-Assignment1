@@ -3,6 +3,6 @@
     admins: read, write, execute
  
 /shared/project1/:
-    users: read, execute
+    users: execute
     project1: read, write, execute
     admins: read, write, execute

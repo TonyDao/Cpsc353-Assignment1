@@ -1,0 +1,14 @@
+/home/jimmy/:
+    jimmy: read, write, execute, copy
+    admins: read, write, execute
+
+/shared/project2/:
+    users: read, execute
+    project2: read, write, execute, copy
+    project12: read
+    admins: read, write, execute
+
+/shared/project12/:
+    users: read
+    project12: read, write, execute
+    admins: read, write, execute

@@ -1,0 +1,7 @@
+alice read /home/jacob/
+alice erase /home/alice/
+jerry write /shared/project1/
+bob write /shared/project1/
+charlie write /shared/project1/
+root read /home/alice/
+root read /shared/project1/

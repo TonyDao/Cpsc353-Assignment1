@@ -1,0 +1,9 @@
+jimmy read /home/jimmy/
+tony read /shared/project2/
+anthony read /home/jimmy/
+alice execute /home/jimmy/
+anthony write /home/bob/
+root execute /shared/project12/
+tony read /shared/project12/
+anthony copy /shared/project2/
+jimmy copy /home/jimmy/
