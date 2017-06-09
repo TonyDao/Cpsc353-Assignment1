@@ -19,7 +19,7 @@ def groups (filename):
     result = []
     with open(filename) as f:
         for cleartext in f:
-            line = cleartext.rstrip('\n')
+            line = cleartext.strip(' \t\n\r')
             # split group and users
             word = line.split(': ', 1)
             word[1] = word[1].split(', ')
@@ -27,7 +27,7 @@ def groups (filename):
             result.append(word)
             # add group into group enumerate
             GROUPENUM.append(word[0])
-            # add user into user enumerate with 
+            # add user into user enumerate with
             [USERENUM.append(user) for user in word[1] if user not in USERENUM]
 
     # Init matrix group(row) by user(column)
@@ -67,15 +67,15 @@ def resources (filename):
     row = [0] * len(GROUPENUM)
     with open(filename) as f:
         for cleartext in f:
-            
-            line = cleartext.rstrip('\n')
+
+            line = cleartext.strip(' \t\n\r')
             words = line.split(':')
 
             # check not empty
             if ':' in line:
                 # check group inside of object
-                if line[:4] == "    ":
-                    group = words[0][4:]
+                if line[0] != "/":
+                    group = words[0]
                     perm = words[1][1:]
                     # add permission number into correct position in matrix
                     row[GROUPENUM.index(group)] = convertPermToNum(perm)
@@ -105,7 +105,7 @@ def checkUserAction(action, permission):
         # print binaryPerm[index]
         if binaryPerm[index] == '1':
             return True
-    
+
     return False
 
 # process Attempted actions
@@ -113,7 +113,7 @@ def attempts (filename):
     global USERGROUPMATRIX
     with open(filename) as f:
         for cleartext in f:
-            line = cleartext.rstrip('\n')
+            line = cleartext.strip(' \t\n\r')
             sub, action, obj = line.split(' ')
 
             # check object is in object enumerate
